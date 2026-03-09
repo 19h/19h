@@ -1,0 +1,197 @@
+
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none"  width="420" height="180" data-theme="light" viewbox="0 0 420 180">
+		<foreignObject width="100%" height="100%">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<style>
+		
+	:root {
+		--color-text-light: #255DF6;
+		--color-dot-bg-0-light: #EBEDF0;
+		--color-dot-bg-1-light: #A7BEFB;
+		--color-dot-bg-2-light: #628BF9;
+		--color-dot-bg-3-light: #4071F7;
+		--color-dot-bg-4-light: #255DF6;
+		--color-dot-border-light: rgb(0 0 0 / 0.06);
+
+		--xcolor-text-dark: #255DF6;
+		--color-text-dark: #ec2400;
+		--color-dot-bg-0-dark: #171B21;
+		--color-dot-bg-1-dark: #152A62;
+		--color-dot-bg-2-dark: #2048B3;
+		--color-dot-bg-3-dark: #1951EB;
+		--color-dot-bg-4-dark: #0048FF;
+		--color-dot-border-dark: rgb(0 0 0 / 0.06);
+
+		/* Initial animation offset... */
+		--default-delay: 0s;
+		--default-duration: 0.1s;
+		--default-stagger: 0.05s;
+
+		/* Animation orchestration */
+		--animate-in-menu-delay: calc(var(--default-delay) + var(--default-stagger) * 0);
+		--animate-in-links-delay: calc(var(--default-delay) + var(--default-stagger) * 1);
+		--animate-in-contributions-delay: calc(var(--default-delay) + var(--default-stagger) * 5);
+		--animate-in-readme-delay: calc(var(--default-delay) + var(--default-stagger) * 6);
+		--animate-in-copy-delay: calc(var(--default-delay) + var(--default-stagger) * 7);
+		--animate-in-graph-delay: calc(var(--default-delay) + var(--default-stagger) * 17);
+	}
+
+	[data-theme="dark"] {
+		--color-text: var(--color-text-dark);
+		--color-dot-bg-0: var(--color-dot-bg-0-dark);
+		--color-dot-bg-1: var(--color-dot-bg-1-dark);
+		--color-dot-bg-2: var(--color-dot-bg-2-dark);
+		--color-dot-bg-3: var(--color-dot-bg-3-dark);
+		--color-dot-bg-4: var(--color-dot-bg-4-dark);
+		--color-dot-border: var(--color-dot-border-dark);
+	}
+
+	[data-theme="light"] {
+		--color-text: var(--color-text-light);
+		--color-dot-bg-0: var(--color-dot-bg-0-light);
+		--color-dot-bg-1: var(--color-dot-bg-1-light);
+		--color-dot-bg-2: var(--color-dot-bg-2-light);
+		--color-dot-bg-3: var(--color-dot-bg-3-light);
+		--color-dot-bg-4: var(--color-dot-bg-4-light);
+		--color-dot-border: var(--color-dot-border-light);
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	.wrapper {
+		contain: strict;
+		block-size: calc(var(--size-height) * 1px);
+		container-type: inline-size;
+		position: relative;
+		overflow: clip;
+
+		font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+		color: var(--color-text);
+	}
+
+	/* Hide everything in Firefox by default – show fallback instead */
+	@-moz-document url-prefix() {
+		.wrapper {
+			display: none;
+		}
+	}
+
+	.label {
+		contain: content;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.link {
+		contain: content;
+		font-size: 14px;
+	}
+
+	.fade-in {
+		will-change: opacity;
+		animation-name: fade-in;
+		animation-fill-mode: both;
+		animation-duration: var(--duration, var(--default-duration));
+		animation-timing-function: var(--ease, ease-out);
+		animation-delay: var(--delay, var(--default-delay));
+	}
+
+	p {
+		constrain: content;
+		margin: 0;
+	}
+
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.shine {
+		background-color: var(--color-text);
+		background-image: linear-gradient(-75deg,
+			rgb(0 0 0 / 0) 0%,
+			rgb(255 255 255 / 0.18) 15%,
+			rgb(0 0 0 / 0) 25%
+		);
+		background-size: 200%;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-fill-color: transparent;
+
+		animation-name: shine;
+		animation-duration: 14s;
+		animation-iteration-count: infinite;
+	}
+
+	@keyframes shine {
+		0% {
+			background-position: 200%;
+		}
+		10% {
+			background-position: 0%;
+		}
+		to {
+			background-position: 0%;
+		}
+	}
+
+
+		:root {
+			--size-height: 90;
+			--size-width: 420;
+		}
+
+		.wrapper {
+			display: none;
+		}
+		@-moz-document url-prefix() {
+			/* Hide everywhere but Firefox */
+			.wrapper {
+				display: flex;
+				align-items: end;
+			}
+		}
+
+		.intro {
+			font-size: 22px;
+			font-weight: 300;
+		}
+		.intro span {
+			contain: content;
+			--duration: 980ms;
+			--delay: calc(var(--animate-in-contributions-delay) + var(--i) * 10ms);
+		}
+
+		.hint {
+			--duration: 1.2s;
+			--delay: calc(var(--animate-in-contributions-delay) + 2.5s);
+			margin-block-start: 10px;
+			font-size: 10px;
+			font-style: italic;
+		}
+	</style>
+				
+		<main class="wrapper">
+			<div class="intro">
+				<p><span class="fade-in" style="--i: 0;">I</span><span class="fade-in" style="--i: 1;">'</span><span class="fade-in" style="--i: 2;">m</span><span class="fade-in" style="--i: 3;"> </span><span class="fade-in" style="--i: 4;">K</span><span class="fade-in" style="--i: 5;">e</span><span class="fade-in" style="--i: 6;">n</span><span class="fade-in" style="--i: 7;">a</span><span class="fade-in" style="--i: 8;">n</span><span class="fade-in" style="--i: 9;">,</span><span class="fade-in" style="--i: 10;"> </span><span class="fade-in" style="--i: 11;">a</span><span class="fade-in" style="--i: 12;">n</span><span class="fade-in" style="--i: 13;">d</span><span class="fade-in" style="--i: 14;"> </span><span class="fade-in" style="--i: 15;">I</span><span class="fade-in" style="--i: 16;"> </span><span class="fade-in" style="--i: 17;">b</span><span class="fade-in" style="--i: 18;">u</span><span class="fade-in" style="--i: 19;">i</span><span class="fade-in" style="--i: 20;">l</span><span class="fade-in" style="--i: 21;">d</span><span class="fade-in" style="--i: 22;"> </span><span class="fade-in" style="--i: 23;">a</span><span class="fade-in" style="--i: 24;">d</span><span class="fade-in" style="--i: 25;">v</span><span class="fade-in" style="--i: 26;">a</span><span class="fade-in" style="--i: 27;">n</span><span class="fade-in" style="--i: 28;">c</span><span class="fade-in" style="--i: 29;">e</span><span class="fade-in" style="--i: 30;">d</span><span class="fade-in" style="--i: 31;"> </span><span class="fade-in" style="--i: 32;">A</span><span class="fade-in" style="--i: 33;">I</span><span class="fade-in" style="--i: 34;"> </span><span class="fade-in" style="--i: 35;">s</span><span class="fade-in" style="--i: 36;">y</span><span class="fade-in" style="--i: 37;">s</span><span class="fade-in" style="--i: 38;">t</span><span class="fade-in" style="--i: 39;">e</span><span class="fade-in" style="--i: 40;">m</span><span class="fade-in" style="--i: 41;">s</span><span class="fade-in" style="--i: 42;">.</span><span class="fade-in" style="--i: 43;"> </span><span class="fade-in" style="--i: 44;">W</span><span class="fade-in" style="--i: 45;">i</span><span class="fade-in" style="--i: 46;">t</span><span class="fade-in" style="--i: 47;">h</span><span class="fade-in" style="--i: 48;"> </span><span class="fade-in" style="--i: 49;">a</span><span class="fade-in" style="--i: 50;"> </span><span class="fade-in" style="--i: 51;">s</span><span class="fade-in" style="--i: 52;">t</span><span class="fade-in" style="--i: 53;">r</span><span class="fade-in" style="--i: 54;">o</span><span class="fade-in" style="--i: 55;">n</span><span class="fade-in" style="--i: 56;">g</span><span class="fade-in" style="--i: 57;"> </span><span class="fade-in" style="--i: 58;">b</span><span class="fade-in" style="--i: 59;">e</span><span class="fade-in" style="--i: 60;">l</span><span class="fade-in" style="--i: 61;">i</span><span class="fade-in" style="--i: 62;">e</span><span class="fade-in" style="--i: 63;">f</span><span class="fade-in" style="--i: 64;"> </span><span class="fade-in" style="--i: 65;">i</span><span class="fade-in" style="--i: 66;">n</span><span class="fade-in" style="--i: 67;"> </span><span class="fade-in" style="--i: 68;">t</span><span class="fade-in" style="--i: 69;">h</span><span class="fade-in" style="--i: 70;">e</span><span class="fade-in" style="--i: 71;"> </span><span class="fade-in" style="--i: 72;">f</span><span class="fade-in" style="--i: 73;">r</span><span class="fade-in" style="--i: 74;">e</span><span class="fade-in" style="--i: 75;">e</span><span class="fade-in" style="--i: 76;">d</span><span class="fade-in" style="--i: 77;">o</span><span class="fade-in" style="--i: 78;">m</span><span class="fade-in" style="--i: 79;"> </span><span class="fade-in" style="--i: 80;">o</span><span class="fade-in" style="--i: 81;">f</span><span class="fade-in" style="--i: 82;"> </span><span class="fade-in" style="--i: 83;">i</span><span class="fade-in" style="--i: 84;">n</span><span class="fade-in" style="--i: 85;">f</span><span class="fade-in" style="--i: 86;">o</span><span class="fade-in" style="--i: 87;">r</span><span class="fade-in" style="--i: 88;">m</span><span class="fade-in" style="--i: 89;">a</span><span class="fade-in" style="--i: 90;">t</span><span class="fade-in" style="--i: 91;">i</span><span class="fade-in" style="--i: 92;">o</span><span class="fade-in" style="--i: 93;">n</span><span class="fade-in" style="--i: 94;">,</span><span class="fade-in" style="--i: 95;"> </span><span class="fade-in" style="--i: 96;">m</span><span class="fade-in" style="--i: 97;">y</span><span class="fade-in" style="--i: 98;"> </span><span class="fade-in" style="--i: 99;">r</span><span class="fade-in" style="--i: 100;">e</span><span class="fade-in" style="--i: 101;">s</span><span class="fade-in" style="--i: 102;">e</span><span class="fade-in" style="--i: 103;">a</span><span class="fade-in" style="--i: 104;">r</span><span class="fade-in" style="--i: 105;">c</span><span class="fade-in" style="--i: 106;">h</span><span class="fade-in" style="--i: 107;"> </span><span class="fade-in" style="--i: 108;">b</span><span class="fade-in" style="--i: 109;">r</span><span class="fade-in" style="--i: 110;">i</span><span class="fade-in" style="--i: 111;">d</span><span class="fade-in" style="--i: 112;">g</span><span class="fade-in" style="--i: 113;">e</span><span class="fade-in" style="--i: 114;">s</span><span class="fade-in" style="--i: 115;"> </span><span class="fade-in" style="--i: 116;">t</span><span class="fade-in" style="--i: 117;">h</span><span class="fade-in" style="--i: 118;">e</span><span class="fade-in" style="--i: 119;"> </span><span class="fade-in" style="--i: 120;">g</span><span class="fade-in" style="--i: 121;">a</span><span class="fade-in" style="--i: 122;">p</span><span class="fade-in" style="--i: 123;"> </span><span class="fade-in" style="--i: 124;">b</span><span class="fade-in" style="--i: 125;">e</span><span class="fade-in" style="--i: 126;">t</span><span class="fade-in" style="--i: 127;">w</span><span class="fade-in" style="--i: 128;">e</span><span class="fade-in" style="--i: 129;">e</span><span class="fade-in" style="--i: 130;">n</span><span class="fade-in" style="--i: 131;"> </span><span class="fade-in" style="--i: 132;">n</span><span class="fade-in" style="--i: 133;">a</span><span class="fade-in" style="--i: 134;">t</span><span class="fade-in" style="--i: 135;">u</span><span class="fade-in" style="--i: 136;">r</span><span class="fade-in" style="--i: 137;">e</span><span class="fade-in" style="--i: 138;">-</span><span class="fade-in" style="--i: 139;">i</span><span class="fade-in" style="--i: 140;">n</span><span class="fade-in" style="--i: 141;">s</span><span class="fade-in" style="--i: 142;">p</span><span class="fade-in" style="--i: 143;">i</span><span class="fade-in" style="--i: 144;">r</span><span class="fade-in" style="--i: 145;">e</span><span class="fade-in" style="--i: 146;">d</span><span class="fade-in" style="--i: 147;"> </span><span class="fade-in" style="--i: 148;">a</span><span class="fade-in" style="--i: 149;">l</span><span class="fade-in" style="--i: 150;">g</span><span class="fade-in" style="--i: 151;">o</span><span class="fade-in" style="--i: 152;">r</span><span class="fade-in" style="--i: 153;">i</span><span class="fade-in" style="--i: 154;">t</span><span class="fade-in" style="--i: 155;">h</span><span class="fade-in" style="--i: 156;">m</span><span class="fade-in" style="--i: 157;">s</span><span class="fade-in" style="--i: 158;"> </span><span class="fade-in" style="--i: 159;">a</span><span class="fade-in" style="--i: 160;">n</span><span class="fade-in" style="--i: 161;">d</span><span class="fade-in" style="--i: 162;"> </span><span class="fade-in" style="--i: 163;">c</span><span class="fade-in" style="--i: 164;">o</span><span class="fade-in" style="--i: 165;">m</span><span class="fade-in" style="--i: 166;">p</span><span class="fade-in" style="--i: 167;">l</span><span class="fade-in" style="--i: 168;">e</span><span class="fade-in" style="--i: 169;">x</span><span class="fade-in" style="--i: 170;"> </span><span class="fade-in" style="--i: 171;">a</span><span class="fade-in" style="--i: 172;">p</span><span class="fade-in" style="--i: 173;">p</span><span class="fade-in" style="--i: 174;">l</span><span class="fade-in" style="--i: 175;">i</span><span class="fade-in" style="--i: 176;">c</span><span class="fade-in" style="--i: 177;">a</span><span class="fade-in" style="--i: 178;">t</span><span class="fade-in" style="--i: 179;">i</span><span class="fade-in" style="--i: 180;">o</span><span class="fade-in" style="--i: 181;">n</span><span class="fade-in" style="--i: 182;">s</span><span class="fade-in" style="--i: 183;">,</span><span class="fade-in" style="--i: 184;"> </span><span class="fade-in" style="--i: 185;">e</span><span class="fade-in" style="--i: 186;">n</span><span class="fade-in" style="--i: 187;">a</span><span class="fade-in" style="--i: 188;">b</span><span class="fade-in" style="--i: 189;">l</span><span class="fade-in" style="--i: 190;">i</span><span class="fade-in" style="--i: 191;">n</span><span class="fade-in" style="--i: 192;">g</span><span class="fade-in" style="--i: 193;"> </span><span class="fade-in" style="--i: 194;">t</span><span class="fade-in" style="--i: 195;">h</span><span class="fade-in" style="--i: 196;">e</span><span class="fade-in" style="--i: 197;"> </span><span class="fade-in" style="--i: 198;">e</span><span class="fade-in" style="--i: 199;">x</span><span class="fade-in" style="--i: 200;">p</span><span class="fade-in" style="--i: 201;">l</span><span class="fade-in" style="--i: 202;">o</span><span class="fade-in" style="--i: 203;">i</span><span class="fade-in" style="--i: 204;">t</span><span class="fade-in" style="--i: 205;">a</span><span class="fade-in" style="--i: 206;">t</span><span class="fade-in" style="--i: 207;">i</span><span class="fade-in" style="--i: 208;">o</span><span class="fade-in" style="--i: 209;">n</span><span class="fade-in" style="--i: 210;"> </span><span class="fade-in" style="--i: 211;">o</span><span class="fade-in" style="--i: 212;">f</span><span class="fade-in" style="--i: 213;"> </span><span class="fade-in" style="--i: 214;">d</span><span class="fade-in" style="--i: 215;">a</span><span class="fade-in" style="--i: 216;">t</span><span class="fade-in" style="--i: 217;">a</span><span class="fade-in" style="--i: 218;"> </span><span class="fade-in" style="--i: 219;">f</span><span class="fade-in" style="--i: 220;">r</span><span class="fade-in" style="--i: 221;">o</span><span class="fade-in" style="--i: 222;">m</span><span class="fade-in" style="--i: 223;"> </span><span class="fade-in" style="--i: 224;">u</span><span class="fade-in" style="--i: 225;">n</span><span class="fade-in" style="--i: 226;">i</span><span class="fade-in" style="--i: 227;">q</span><span class="fade-in" style="--i: 228;">u</span><span class="fade-in" style="--i: 229;">e</span><span class="fade-in" style="--i: 230;"> </span><span class="fade-in" style="--i: 231;">a</span><span class="fade-in" style="--i: 232;">n</span><span class="fade-in" style="--i: 233;">g</span><span class="fade-in" style="--i: 234;">l</span><span class="fade-in" style="--i: 235;">e</span><span class="fade-in" style="--i: 236;">s</span><span class="fade-in" style="--i: 237;">.</span></p>
+				<p class="hint fade-in">—</p>
+			</div>
+		</main>
+	
+			</div>
+		</foreignObject>
+	</svg>

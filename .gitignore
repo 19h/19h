@@ -1,9 +1,6 @@
 dist
 src/stats.json
-.dev.vars
-.wrangler/
-.DS_Store
 .env
+.DS_Store
 node_modules/
-.github
 .idea/

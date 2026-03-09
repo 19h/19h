@@ -1,5 +1,14 @@
-import { writeFile } from 'node:fs/promises';
-import type { Year } from '../src/worker';
+import { readFile, writeFile } from 'node:fs/promises';
+import type { Year } from '../src/types';
+
+// Load .env if it exists (local dev). In CI the env vars are injected directly.
+try {
+  const env = await readFile('.env', 'utf-8');
+  for (const line of env.split('\n')) {
+    const match = line.match(/^\s*([^#=]+?)\s*=\s*(.*)\s*$/);
+    if (match) process.env[match[1]] = match[2];
+  }
+} catch {}
 
 export const START_DATE = new Date('2012-09-07T04:00:00.000Z');
 
@@ -53,23 +62,33 @@ export async function request(date: { from?: Date; to?: Date }) {
 		}
 		`,
     variables: {
-      username: 'terkelg',
+      username: '19h',
       from: date.from?.toISOString(),
       to: date.to?.toISOString()
     }
   };
-  const response = await fetch('https://api.github.com/graphql', {
+  const res = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'User-Agent': 'terkelg/readme',
+      'User-Agent': '19h/readme',
       Authorization: `bearer ${process.env.API_TOKEN_GITHUB}`
     },
     body: JSON.stringify(body)
-  }).then((res) => res.json() as Promise<Response>);
-  const calender = response.data.user.contributionsCollection.contributionCalendar;
-  const weeks = calender.weeks;
-  return { weeks, contributions: calender.totalContributions };
+  });
+
+  if (!res.ok) {
+    throw new Error(`GitHub API returned ${res.status}: ${await res.text()}`);
+  }
+
+  const response = (await res.json()) as Response;
+
+  if (!response.data?.user) {
+    throw new Error(`GitHub API error: ${JSON.stringify((response as any).errors ?? response)}`);
+  }
+
+  const calendar = response.data.user.contributionsCollection.contributionCalendar;
+  return { weeks: calendar.weeks, contributions: calendar.totalContributions };
 }
 
 /**
@@ -118,10 +137,14 @@ async function getAllContributions(start: Date, end = new Date()) {
     });
     cursor = next;
   }
-  return [years.reverse(), contributions];
+  return { years: years.reverse(), contributions };
 }
 
-const [years, contributions] = await getAllContributions(START_DATE);
+if (!process.env.API_TOKEN_GITHUB) {
+  throw new Error('Missing API_TOKEN_GITHUB environment variable');
+}
+
+const { years, contributions } = await getAllContributions(START_DATE);
 
 await writeFile('src/stats.json', JSON.stringify({ years, contributions }));
 

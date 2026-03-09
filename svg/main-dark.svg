@@ -1,45 +1,9 @@
-import type { Year } from './types';
 
-const BP_MEDIUM = 550;
-const BP_LARGE = 700;
-const BODY_COPY = [
-  //`I'm Kenan, and I specialize in developing advanced AI systems for the compliance, intelligence and high-frequency algorithmic trading sector.`,
-  `I'm Kenan, and I build advanced AI systems.`,
-  'With a strong belief in the freedom of information, my research bridges the gap between nature-inspired algorithms and complex applications, enabling the exploitation of data from unique angles.'
-].join(' ');
-
-interface Props {
-  width?: number;
-  height: number;
-  theme: 'light' | 'dark';
-}
-
-interface Attributes {
-  height: string;
-  'data-theme': 'light' | 'dark';
-
-  [key: string]: string;
-}
-
-const attr = (obj: Record<string, string>) =>
-  Object.entries(obj).reduce((acc, [key, value]) => `${acc} ${key}="${value}"`, '');
-
-const svg = (styles: string, html: string, attributes: Attributes) => {
-  if (!attributes.width) {
-    attributes.width = '100%';
-  }
-  return /*html*/ `
-	<svg xmlns="http://www.w3.org/2000/svg" fill="none" ${attr(attributes)}>
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none"  height="350" data-theme="dark" width="100%">
 		<foreignObject width="100%" height="100%">
 			<div xmlns="http://www.w3.org/1999/xhtml">
-				<style>${styles}</style>
-				${html}
-			</div>
-		</foreignObject>
-	</svg>`;
-};
-
-export const shared = /* css */ `
+				<style>
+		
 	:root {
 		--color-text-light: #255DF6;
 		--color-dot-bg-0-light: #EBEDF0;
@@ -184,37 +148,15 @@ export const shared = /* css */ `
 			background-position: 0%;
 		}
 	}
-`;
 
-export type Main = {
-  years: Year[];
-  sizes: number[][];
-  length: number;
-  location: {
-    city: string;
-    country: string;
-  };
-  dots: {
-    rows: number;
-    size: number;
-    gap: number;
-  };
-  year: {
-    gap: number;
-  };
-};
-
-export const main = (props: Props & Main) => {
-  const styles = /*css*/ `
-		${shared}
 
 		:root {
-			--rows: ${props.dots.rows};
+			--rows: 6;
 			--size-width: 100cqw;
-			--size-height: ${props.height};
-			--size-dot-gap: ${props.dots.gap};
-			--size-dot: ${props.dots.size};
-			--size-year-gap: ${props.year.gap};
+			--size-height: 350;
+			--size-dot-gap: 5;
+			--size-dot: 24;
+			--size-year-gap: 5;
 			--size-label-height: 20;
 			--duration: 360;
 		}
@@ -315,14 +257,14 @@ export const main = (props: Props & Main) => {
 			50% { opacity: 0; }
 		}
 
-		@media (width > ${BP_MEDIUM}px) {
+		@media (width > 550px) {
 			.intro {
 				xgrid-area: 1 / 3 / span 1 / span 4;
 				grid-area: 1 / 2 / span 1 / span 5
 				font-size: 22px;
 			}
 		}
-		@media (width > ${BP_LARGE}px) {
+		@media (width > 700px) {
 			.intro {
 				xgrid-area: 1 / 4 / span 1 / span 3;
 				grid-area: 1 / 2 / span 1 / span 5
@@ -453,292 +395,30 @@ export const main = (props: Props & Main) => {
 				filter: brightness(1.3);
 			}
 		}
-	`;
-
-  const format = (date: Date) =>
-    date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-
-  const date = (i: number) =>
-    i == 0 ? format(new Date()) : new Date(props.years[i].from).getFullYear();
-
-  const days = (days: Year['days']) =>
-    days.map((level, i) => `<div class="dot dot--${level}" style="--dot-i: ${i};"></div>`).join('');
-
-  const totalChars = BODY_COPY.length;
-  const html = /* html */ `
-		<main class="wrapper grid" style="--total-chars: ${totalChars};">
+	</style>
+				
+		<main class="wrapper grid" style="--total-chars: 238;">
 			<div class="blobs">
 				<div class="blob blob--1"></div>
 				<div class="blob blob--2"></div>
 				<div class="blob blob--3"></div>
 			</div>
 			<article class="intro">
-				<p>${BODY_COPY.split('')
-          .map((c, i) => `<span style="--i: ${i};">${c}</span>`)
-          .join('')}<span class="cursor">|</span></p>
+				<p><span style="--i: 0;">I</span><span style="--i: 1;">'</span><span style="--i: 2;">m</span><span style="--i: 3;"> </span><span style="--i: 4;">K</span><span style="--i: 5;">e</span><span style="--i: 6;">n</span><span style="--i: 7;">a</span><span style="--i: 8;">n</span><span style="--i: 9;">,</span><span style="--i: 10;"> </span><span style="--i: 11;">a</span><span style="--i: 12;">n</span><span style="--i: 13;">d</span><span style="--i: 14;"> </span><span style="--i: 15;">I</span><span style="--i: 16;"> </span><span style="--i: 17;">b</span><span style="--i: 18;">u</span><span style="--i: 19;">i</span><span style="--i: 20;">l</span><span style="--i: 21;">d</span><span style="--i: 22;"> </span><span style="--i: 23;">a</span><span style="--i: 24;">d</span><span style="--i: 25;">v</span><span style="--i: 26;">a</span><span style="--i: 27;">n</span><span style="--i: 28;">c</span><span style="--i: 29;">e</span><span style="--i: 30;">d</span><span style="--i: 31;"> </span><span style="--i: 32;">A</span><span style="--i: 33;">I</span><span style="--i: 34;"> </span><span style="--i: 35;">s</span><span style="--i: 36;">y</span><span style="--i: 37;">s</span><span style="--i: 38;">t</span><span style="--i: 39;">e</span><span style="--i: 40;">m</span><span style="--i: 41;">s</span><span style="--i: 42;">.</span><span style="--i: 43;"> </span><span style="--i: 44;">W</span><span style="--i: 45;">i</span><span style="--i: 46;">t</span><span style="--i: 47;">h</span><span style="--i: 48;"> </span><span style="--i: 49;">a</span><span style="--i: 50;"> </span><span style="--i: 51;">s</span><span style="--i: 52;">t</span><span style="--i: 53;">r</span><span style="--i: 54;">o</span><span style="--i: 55;">n</span><span style="--i: 56;">g</span><span style="--i: 57;"> </span><span style="--i: 58;">b</span><span style="--i: 59;">e</span><span style="--i: 60;">l</span><span style="--i: 61;">i</span><span style="--i: 62;">e</span><span style="--i: 63;">f</span><span style="--i: 64;"> </span><span style="--i: 65;">i</span><span style="--i: 66;">n</span><span style="--i: 67;"> </span><span style="--i: 68;">t</span><span style="--i: 69;">h</span><span style="--i: 70;">e</span><span style="--i: 71;"> </span><span style="--i: 72;">f</span><span style="--i: 73;">r</span><span style="--i: 74;">e</span><span style="--i: 75;">e</span><span style="--i: 76;">d</span><span style="--i: 77;">o</span><span style="--i: 78;">m</span><span style="--i: 79;"> </span><span style="--i: 80;">o</span><span style="--i: 81;">f</span><span style="--i: 82;"> </span><span style="--i: 83;">i</span><span style="--i: 84;">n</span><span style="--i: 85;">f</span><span style="--i: 86;">o</span><span style="--i: 87;">r</span><span style="--i: 88;">m</span><span style="--i: 89;">a</span><span style="--i: 90;">t</span><span style="--i: 91;">i</span><span style="--i: 92;">o</span><span style="--i: 93;">n</span><span style="--i: 94;">,</span><span style="--i: 95;"> </span><span style="--i: 96;">m</span><span style="--i: 97;">y</span><span style="--i: 98;"> </span><span style="--i: 99;">r</span><span style="--i: 100;">e</span><span style="--i: 101;">s</span><span style="--i: 102;">e</span><span style="--i: 103;">a</span><span style="--i: 104;">r</span><span style="--i: 105;">c</span><span style="--i: 106;">h</span><span style="--i: 107;"> </span><span style="--i: 108;">b</span><span style="--i: 109;">r</span><span style="--i: 110;">i</span><span style="--i: 111;">d</span><span style="--i: 112;">g</span><span style="--i: 113;">e</span><span style="--i: 114;">s</span><span style="--i: 115;"> </span><span style="--i: 116;">t</span><span style="--i: 117;">h</span><span style="--i: 118;">e</span><span style="--i: 119;"> </span><span style="--i: 120;">g</span><span style="--i: 121;">a</span><span style="--i: 122;">p</span><span style="--i: 123;"> </span><span style="--i: 124;">b</span><span style="--i: 125;">e</span><span style="--i: 126;">t</span><span style="--i: 127;">w</span><span style="--i: 128;">e</span><span style="--i: 129;">e</span><span style="--i: 130;">n</span><span style="--i: 131;"> </span><span style="--i: 132;">n</span><span style="--i: 133;">a</span><span style="--i: 134;">t</span><span style="--i: 135;">u</span><span style="--i: 136;">r</span><span style="--i: 137;">e</span><span style="--i: 138;">-</span><span style="--i: 139;">i</span><span style="--i: 140;">n</span><span style="--i: 141;">s</span><span style="--i: 142;">p</span><span style="--i: 143;">i</span><span style="--i: 144;">r</span><span style="--i: 145;">e</span><span style="--i: 146;">d</span><span style="--i: 147;"> </span><span style="--i: 148;">a</span><span style="--i: 149;">l</span><span style="--i: 150;">g</span><span style="--i: 151;">o</span><span style="--i: 152;">r</span><span style="--i: 153;">i</span><span style="--i: 154;">t</span><span style="--i: 155;">h</span><span style="--i: 156;">m</span><span style="--i: 157;">s</span><span style="--i: 158;"> </span><span style="--i: 159;">a</span><span style="--i: 160;">n</span><span style="--i: 161;">d</span><span style="--i: 162;"> </span><span style="--i: 163;">c</span><span style="--i: 164;">o</span><span style="--i: 165;">m</span><span style="--i: 166;">p</span><span style="--i: 167;">l</span><span style="--i: 168;">e</span><span style="--i: 169;">x</span><span style="--i: 170;"> </span><span style="--i: 171;">a</span><span style="--i: 172;">p</span><span style="--i: 173;">p</span><span style="--i: 174;">l</span><span style="--i: 175;">i</span><span style="--i: 176;">c</span><span style="--i: 177;">a</span><span style="--i: 178;">t</span><span style="--i: 179;">i</span><span style="--i: 180;">o</span><span style="--i: 181;">n</span><span style="--i: 182;">s</span><span style="--i: 183;">,</span><span style="--i: 184;"> </span><span style="--i: 185;">e</span><span style="--i: 186;">n</span><span style="--i: 187;">a</span><span style="--i: 188;">b</span><span style="--i: 189;">l</span><span style="--i: 190;">i</span><span style="--i: 191;">n</span><span style="--i: 192;">g</span><span style="--i: 193;"> </span><span style="--i: 194;">t</span><span style="--i: 195;">h</span><span style="--i: 196;">e</span><span style="--i: 197;"> </span><span style="--i: 198;">e</span><span style="--i: 199;">x</span><span style="--i: 200;">p</span><span style="--i: 201;">l</span><span style="--i: 202;">o</span><span style="--i: 203;">i</span><span style="--i: 204;">t</span><span style="--i: 205;">a</span><span style="--i: 206;">t</span><span style="--i: 207;">i</span><span style="--i: 208;">o</span><span style="--i: 209;">n</span><span style="--i: 210;"> </span><span style="--i: 211;">o</span><span style="--i: 212;">f</span><span style="--i: 213;"> </span><span style="--i: 214;">d</span><span style="--i: 215;">a</span><span style="--i: 216;">t</span><span style="--i: 217;">a</span><span style="--i: 218;"> </span><span style="--i: 219;">f</span><span style="--i: 220;">r</span><span style="--i: 221;">o</span><span style="--i: 222;">m</span><span style="--i: 223;"> </span><span style="--i: 224;">u</span><span style="--i: 225;">n</span><span style="--i: 226;">i</span><span style="--i: 227;">q</span><span style="--i: 228;">u</span><span style="--i: 229;">e</span><span style="--i: 230;"> </span><span style="--i: 231;">a</span><span style="--i: 232;">n</span><span style="--i: 233;">g</span><span style="--i: 234;">l</span><span style="--i: 235;">e</span><span style="--i: 236;">s</span><span style="--i: 237;">.</span><span class="cursor">|</span></p>
 			</article>
 			<article class="graph">
 				<div class="graph__parallax"></div>
-				<div class="years" style="--w: ${props.length}; --h: ${props.sizes[0][1]};">
-					${props.years
-            .map(
-              (year, i) => /* html */ `
-						<div class="year year--${i}" style="--w: ${props.sizes[i][0]}; --h: ${props.sizes[i][1]};">
-							<div class="year__days">${days(year.days)}</div>
-							<div class="year__label label"><span>${date(i)}</span></div>
+				<div class="years" style="--w: 53; --h: 169;">
+					
+						<div class="year year--0" style="--w: 53; --h: 169;">
+							<div class="year__days"><div class="dot dot--0" style="--dot-i: 0;"></div><div class="dot dot--1" style="--dot-i: 1;"></div><div class="dot dot--2" style="--dot-i: 2;"></div><div class="dot dot--3" style="--dot-i: 3;"></div><div class="dot dot--4" style="--dot-i: 4;"></div><div class="dot dot--0" style="--dot-i: 5;"></div><div class="dot dot--1" style="--dot-i: 6;"></div><div class="dot dot--2" style="--dot-i: 7;"></div><div class="dot dot--3" style="--dot-i: 8;"></div><div class="dot dot--4" style="--dot-i: 9;"></div><div class="dot dot--0" style="--dot-i: 10;"></div><div class="dot dot--1" style="--dot-i: 11;"></div></div>
+							<div class="year__label label"><span>Mar 9, 2026</span></div>
 						</div>
-					`
-            )
-            .join('')}
+					
 				</div>
 			</article>
 		</main>
-	`;
-
-  return svg(styles, html, {
-    height: `${props.height}`,
-    'data-theme': `${props.theme}`
-  });
-};
-
-export const top = (
-  props: Props & {
-    contributions: number;
-  }
-) => {
-  const styles = /* css */ `
-		${shared}
-
-		:root {
-			--size-height: ${props.height};
-		}
-
-		.wrapper {
-			align-items: center;
-		}
-
-		.gradient-border {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 2px;
-			background: linear-gradient(
-				90deg,
-				var(--color-dot-bg-1),
-				var(--color-dot-bg-2),
-				var(--color-dot-bg-3),
-				var(--color-dot-bg-4),
-				var(--color-dot-bg-3),
-				var(--color-dot-bg-2),
-				var(--color-dot-bg-1)
-			);
-			background-size: 200% 100%;
-			animation: gradient-flow 4s linear infinite;
-			opacity: 0;
-			animation: gradient-flow 4s linear infinite, fade-in 0.5s ease-out 0.3s forwards;
-		}
-		@keyframes gradient-flow {
-			0% { background-position: 0% 50%; }
-			100% { background-position: 200% 50%; }
-		}
-
-		.menu {
-			--delay: var(--animate-in-menu-delay);
-			contain: content;
-			text-align: left;
-			grid-area: 1 / 1 / span 1 / span 2;
-		}
-		.contributions {
-			--delay: var(--animate-in-contributions-delay);
-			contain: strict; /* hide, show later */
-			grid-area: 1 / 3 / span 1 / span 2;
-		}
-		.readme {
-			--delay: var(--animate-in-readme-delay);
-			contain: content;
-			text-align: right;
-			grid-area: 1 / 5 / span 1 / span 2;
-		}
-
-		@media (width > ${BP_MEDIUM}px) {
-			.menu {
-				grid-area: 1 / 1 / span 1 / span 2;
-			}
-			.contributions {
-				contain: content; /* show again */
-				grid-area: 1 / 3 / span 1 / span 2;
-			}
-			.readme {
-				grid-area: 1 / 5 / span 1 / span 2;
-			}
-		}
-
-		@media (width > ${BP_LARGE}px) {
-			.menu {
-				grid-area: 1 / 1 / span 1 / span 3;
-			}
-			.contributions {
-				grid-area: 1 / 4 / span 1 / span 2;
-			}
-			.readme {
-				grid-area: 1 / 6 / span 1 / span 1;
-			}
-		}
-	`;
-
-  const html = /*html*/ `
-		<div class="wrapper grid label">
-			<div class="menu fade-in">Menu</div>
-			<div class="contributions fade-in">
-				<span class="shine">${(props.contributions / 1000).toFixed(1)}k</span> Contributions
+	
 			</div>
-			<div class="readme fade-in">readme.md</div>
-			<div class="gradient-border"></div>
-		</div>
-	`;
-
-  return svg(styles, html, {
-    height: `${props.height}`,
-    'data-theme': `${props.theme}`
-  });
-};
-
-export const link =
-  (
-    props: Props & {
-      index: number;
-    }
-  ) =>
-  (label: string) => {
-    const styles = /*css*/ `
-		${shared}
-
-		:root {
-			--size-height: ${props.height};
-			--size-width: ${props.width};
-			--i: ${props.index};
-		}
-
-		.wrapper {
-			--delay: calc(var(--animate-in-links-delay) + var(--i) * 1.2s);
-		}
-		@-moz-document url-prefix() {
-			/* Overwrite default, allow this to show in FF */
-			.wrapper {
-				display: block;
-			}
-		}
-
-		.link {
-			display: flex;
-			justify-content: start;
-			align-items: center;
-			gap: 3px;
-		}
-		.link__label {
-			animation-delay: ${Math.random() * 10}s;
-		}
-		.link__arrow {
-			font-size: 0.75em;
-			position: relative;
-			inset-block-start: 0.1em;
-			animation-name: rotate;
-			animation-duration: 5s;
-			animation-timing-function: ease-in-out;
-			animation-iteration-count: infinite;
-			animation-delay: ${Math.random() * 5}s;
-		}
-
-		@keyframes rotate {
-			0% {
-				transform: rotate(0deg);
-			}
-			10%,
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-	`;
-
-    const html = /*html*/ `
-		<main class="wrapper">
-			<a class="link fade-in">
-				<div class="link__label shine">${label}</div>
-				<div class="link__arrow">↗</div>
-			</a>
-		</main>
-	`;
-
-    return svg(styles, html, {
-      width: `${props.width}`,
-      height: `${props.height}`,
-      'data-theme': `${props.theme}`
-    });
-  };
-
-export const fallback = (
-  props: Props & {
-    width: number;
-  }
-) => {
-  const styles = /* css */ `
-		${shared}
-
-		:root {
-			--size-height: ${props.height / 2};
-			--size-width: ${props.width};
-		}
-
-		.wrapper {
-			display: none;
-		}
-		@-moz-document url-prefix() {
-			/* Hide everywhere but Firefox */
-			.wrapper {
-				display: flex;
-				align-items: end;
-			}
-		}
-
-		.intro {
-			font-size: 22px;
-			font-weight: 300;
-		}
-		.intro span {
-			contain: content;
-			--duration: 980ms;
-			--delay: calc(var(--animate-in-contributions-delay) + var(--i) * 10ms);
-		}
-
-		.hint {
-			--duration: 1.2s;
-			--delay: calc(var(--animate-in-contributions-delay) + 2.5s);
-			margin-block-start: 10px;
-			font-size: 10px;
-			font-style: italic;
-		}
-	`;
-
-  const html = /* html */ `
-		<main class="wrapper">
-			<div class="intro">
-				<p>${BODY_COPY.split('')
-          .map((c, i) => `<span class="fade-in" style="--i: ${i};">${c}</span>`)
-          .join('')}</p>
-				<p class="hint fade-in">—</p>
-			</div>
-		</main>
-	`;
-
-  return svg(styles, html, {
-    width: `${props.width}`,
-    height: `${props.height}`,
-    'data-theme': `${props.theme}`,
-    viewbox: `0 0 ${props.width} ${props.height}`
-  });
-};
+		</foreignObject>
+	</svg>
