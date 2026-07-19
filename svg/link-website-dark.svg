@@ -173,7 +173,7 @@
 			gap: 3px;
 		}
 		.link__label {
-			animation-delay: 5.931293870620693s;
+			animation-delay: 7.33124905015885s;
 		}
 		.link__arrow {
 			font-size: 0.75em;
@@ -183,7 +183,7 @@
 			animation-duration: 5s;
 			animation-timing-function: ease-in-out;
 			animation-iteration-count: infinite;
-			animation-delay: 2.2436601784024077s;
+			animation-delay: 2.566724192609956s;
 		}
 
 		@keyframes rotate {
